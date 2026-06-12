@@ -105,22 +105,18 @@ for step in range(epochs):
 
 
 
-#context = torch.tensor([[word2idx["hello"]]], dtype=torch.long)
-#out = model.generate(context, max_new_tokens=15)
 
-#print("\nGenerated text:\n")
-#print(" ".join(idx2word[int(i)] for i in out[0]))
 
 import sentencepiece as spm
 sp = spm.SentencePieceProcessor()
 sp.load("tokenizer.model")
 
-context = torch.tensor([sp.encode("machine")], dtype=torch.long)
+context = torch.tensor([sp.encode("machine learning")], dtype=torch.long)
 
 out = model.generate(context, max_new_tokens=100)
 
 print("\nGenerated text:\n")
-# print(" ".join(idx2word[int(i)] for i in out[0]))
+
 
 generated_ids = out[0].tolist()
 print(sp.decode(generated_ids))
